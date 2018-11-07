@@ -1,0 +1,23 @@
+body {
+    background-color: lightgray;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #e5e5f8;
+    padding: 20px;
+    height: 250px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    line-height: 26px;
+}
+
+.home-link h2 {
+    line-height: 60px;
+}
+
+
