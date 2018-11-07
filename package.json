@@ -10,7 +10,8 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production"
+        "build": "encore production",
+        "heroku-postbuild" : "node_modules/.bin/encore production"
     },
     "dependencies": {
         "jquery": "^3.3.1",
