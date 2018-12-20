@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Habitat Saint-Quentinois{% endblock %}</title>
+    <meta name="description" content="{% block description %}Habitat Saint-Quentinois{% endblock %}" />
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <link rel="Habitat Saint-Quentinois" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     {% block stylesheets %}{% endblock %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
-<body>
+<body class="{% block bodyclass %}{% endblock %}">
 <header class="noo-header header_default">
     <div class="navbar-wrapper">
         <div class="noo-topbar">
@@ -19,7 +21,7 @@
                 </div>
                 <div class="noo-topmeta noo-topmeta-right pull-right">
 
-                    <a id="menu-item-register" class="noo-popup-register noo-login-button menu-item-register" href="#" title="Register"><i class="fa fa-edit"></i> Contactez-nous </a>
+                    <a id="menu-item-register" class="noo-popup-register noo-login-button menu-item-register" href="{{ url('contact') }}" title="Contactez-nous"><i class="fa fa-edit"></i> Contactez-nous </a>
                 </div>
             </div>
         </div>
@@ -34,74 +36,11 @@
                             <img class="noo-logo-img noo-logo-normal" src="{{ asset('images/logo.png') }}" alt="Habitat Saint-Quentinois">
                         </a>
                     </div>
-                    <nav class="noo-md-8 noo-main-menu">
-                        <ul id="menu-menu-primary" class="nav-collapse navbar-nav">
-                            <li id="menu-item-2512"
-                                class="noo-menu   menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children ">
-                                <a href="#">Nous Connaître</a>
-                                <ul class="sub-menu">
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Carte d'Identité  </a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Historique</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Organisation Interne</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Offres d'Emploi</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Notre Patrimoine</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Habitat Senior et adaptabilité</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-2450"
-                                class="noo-menu   menu-item menu-item-type-post_type_archive menu-item-object-noo_property menu-item-has-children ">
-                                <a href="#">Devenir Locataire</a>
-                                <ul class="sub-menu">
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Nos ofrres</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type_archive menu-item-object-noo_property ">
-                                        <a href="#">Faire une demande de logement social</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-2465"
-                                class="noo-menu   menu-item menu-item-type-post_type_archive menu-item-object-noo_agent menu-item-has-children ">
-                                <a href="#">Devenir Propriétaire</a>
-                            </li>
-                            <li id="menu-item-2178"
-                                class="noo-menu   menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children ">
-                                <a href="#">Entreprises</a>
-                                <ul class="sub-menu">
-                                    <li class="noo-menu menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Marchés en cours</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Marchés attribués</a>
-                                    </li>
-                                    <li class="noo-menu menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="#">Relations avec les Entreprises</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-2178"
-                                class="noo-menu   menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children ">
-                                <a href="#">Contact</a>
-                            </li>
-                            <li class="magic-line hide-line" style="width: 78px; left: 0px;"></li>
-                        </ul>
-                    </nav>
+                    {{ render(controller('App\\Controller\\MenuController::main')) }}
                     <div class="noo-md-2 navbar-meta meta-property">
                         <div class="meta-content">
                             <a href="#"
-                               class="meta-property noo-button">
+                               class="meta-property noo-button" data-toggle="modal" data-target="#espace-locataire-login">
                                 <span><i class="fa fa-user-circle"></i></span>Espace Locataire</a>
                         </div>
                     </div>
@@ -111,54 +50,57 @@
     </div>
 </header>
 {% block body %}{% endblock %}
-<footer class="wrap-footer footer_1">
-
-    <div class="main-footer">
-        <div class="colophon wigetized">
-            <div class="noo-container">
-                <div class="noo-row">
-                    <div class="xxx footer-column-item noo-md-4 noo-sm-6">
-                        <div id="text-2" class="widget widget_text">
-                            <h4 class="widget-title">Contact</h4>
-                            <div class="textwidget">
-                                <ul class="contact-info">
-                                    <li><i class="fa fa-map-marker"></i> 4 rue Henri Hertz, SAINT-QUENTIN</li>
-                                    <li><i class="fa fa-phone"></i> 03 23 06 05 40</li>
-                                </ul>
+{{ render(controller('App\\Controller\\BlockController::footer')) }}
+{% block javascripts %}{% endblock %}
+<script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
+<div class="bootstrap">
+    <div class="modal fade" id="espace-locataire-login" tabindex="-1" role="dialog" aria-labelledby="Espace Locataire" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Connexion Espace Locataire</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" action="http://www.habitatsaintquentinois.fr/EspaceLocataire/User/profil/validationsignature" method="post">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label required">Identifiant</label>
+                            <div class="col-sm-8">
+                                <input name="identifiant" type="text" class="form-control" id="identifiant" placeholder="Identifiant" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="xxx footer-column-item noo-md-4 noo-sm-6">
-                        <div id="text-3" class="widget widget_text">
-                            <h4 class="widget-title">Horaires</h4>
-                            <div class="textwidget">
-                                <ul class="open-info">
-                                    <li>Lun - Mer - Ven : 8h30 - 12h | 13h30 - 17h</li>
-                                    <li>Mar - Jeu: 8h30 - 12h</li>
-                                </ul>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-4 col-form-label required">Mot de passe</label>
+                            <div class="col-sm-8">
+                                <input name="motdepasse" type="password" class="form-control" id="motdepasse" placeholder="Mot de passe" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="xxx footer-column-item noo-md-4 noo-sm-6">
-                        <div id="nav_menu-2" class="widget widget_nav_menu">
-                            <h4 class="widget-title">Liens Utiles</h4>
-                            <div class="menu-useful-link-container">
-                                <ul id="menu-useful-link" class="menu">
-                                    <li id="menu-item-2344" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2344"><a href="#">Nous Situer</a></li>
-                                    <li id="menu-item-2345" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2345"><a href="#">Nous Contacter</a></li>
-                                    <li id="menu-item-1476" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1476"><a href="#">Documents à Télécharger</a></li>
-                                    <li id="menu-item-1476" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1476"><a href="#">Nos Partenaires</a></li>
-                                    <li id="menu-item-1476" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1476"><a href="#">Mentions Légales</a></li>
-                                </ul>
+                        <div class="form-group row">
+                            <div class="col-sm-4">Mémoriser</div>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input name="souvenir" class="form-check-input" id="souvenir" type="checkbox" >
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group row align-items-right">
+                            <div class="col-sm-12" style="text-align:center">
+                                <button type="submit" class="btn btn-primary">S'identifier</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <i>
+                        En cochant la case "Mémoriser", votre identification sera mémorisée sur votre ordinateur.Pour cela, votre navigateur doit accepter les cookies.
+                        Si votre ordinateur est partagé entre plusieurs utilisateurs, ne pas cocher cette case.
+                    </i>
                 </div>
             </div>
         </div>
     </div>
-</footer>
-{% block javascripts %}{% endblock %}
-<script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
+</div>
 </body>
 </html>

@@ -1,0 +1,15 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        push:
+            uri_prefix: '%app.path.push_images%'
+            upload_destination: '%kernel.project_dir%/public/images/push'
+        property:
+            uri_prefix: '%app.path.property_images%'
+            upload_destination: '%kernel.project_dir%/public/images/property'
+        document:
+            uri_prefix: '%app.path.download_document%'
+            upload_destination: '%kernel.project_dir%/public/document/download'
+        cover:
+            uri_prefix: '%app.path.download_images%'
+            upload_destination: '%kernel.project_dir%/public/images/download'

@@ -1,0 +1,28 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+fos_ck_editor:
+    input_sync: true
+    default_config: simple_config
+    configs:
+        simple_config:
+            toolbar: standard
+            extraPlugins: "youtube"
+    toolbars:
+        items:
+            standard.basic_styles: ['Bold', 'Italic', 'Strike', '-', 'TextColor', 'BGColor', 'Button']
+            standard.clipboard: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+            standard.document: ['Source']
+            standard.editing: ['JustifyLeft', 'JustifyCenter', 'JustifyRight']
+            standard.links: ['Link', 'Unlink']
+            standard.insert: ['Image', 'Table', 'Youtube', 'HorizontalRule']
+            standard.paragraph: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+            standard.tools: []
+            standard.about: ['Format', 'About']
+    plugins:
+        youtube:
+            path:     "/js/ckeditor/plugin/youtube/"
+            filename: "plugin.js"

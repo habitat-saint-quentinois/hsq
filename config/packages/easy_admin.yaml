@@ -1,4 +1,233 @@
 easy_admin:
+    design:
+        assets:
+            js:
+                - '/bundles/cksourceckfinder/ckfinder/ckfinder.js'
+                - '/js/setup-ckfinder.js'
+        form_theme:
+            - 'horizontal'
+        menu:
+            - { entity: 'Push', icon: 'volume-off' }
+            - { entity: 'Property', icon: 'home' }
+            - { entity: 'Menu', icon: 'bars' }
+            - { entity: 'Page', icon: 'file' }
+            - { entity: 'Document', label: 'Download', icon: 'download' }
+            - { entity: 'User', label: 'Users', icon: 'user' }
+            - { entity: 'Config', label: 'Config', icon: 'cog' }
     entities:
-        # List the entity class name you want to manage
-        - App\Entity\MenuElement
+        Document:
+            class: App\Entity\Document
+            list:
+                fields:
+                    - name
+                    - { property: 'image', type: 'image', base_path: '%app.path.download_images%' }
+                    - originalName
+                    - isActive
+            form:
+                fields:
+                    - name
+                    - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'simple_config' } }
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'file', type: 'file' }
+                    - isActive
+        Property:
+            class: App\Entity\Property
+            list:
+                fields:
+                    - title
+                    - { property: 'image', type: 'image', base_path: '%app.path.property_images%' }
+                    - type
+                    - kind
+                    - price
+                    - push
+                    - isActive
+            form:
+                fields:
+                    - property: 'type'
+                      type: choice
+                      type_options:
+                        choices:
+                            'vente': 'vente'
+                            'location': 'location'
+                    - property: 'definition'
+                      type: choice
+                      type_options:
+                        choices:
+                            'logements collectifs': 'logements collectifs'
+                            'logement individuel': 'logement individuel'
+                    - property: 'kind'
+                      type: choice
+                      type_options:
+                        choices:
+                            'appartement T1': 'appartement T1'
+                            'appartement T2': 'appartement T2'
+                            'appartement T3': 'appartement T3'
+                            'appartement T4': 'appartement T4'
+                            'appartement T5': 'appartement T5'
+                            'appartement T6': 'appartement T6'
+                            'appartement T7': 'appartement T7'
+                            'appartement T8': 'appartement T8'
+                            'appartement T9': 'appartement T9'
+                            'maison T1': 'maison T1'
+                            'maison T2': 'maison T2'
+                            'maison T3': 'maison T3'
+                            'maison T4': 'maison T4'
+                            'maison T5': 'maison T5'
+                            'maison T6': 'maison T6'
+                            'maison T7': 'maison T7'
+                            'maison T8': 'maison T8'
+                            'maison T9': 'maison T9'
+                            'garage': 'garage'
+                            'autre': 'autre'
+                    - place
+                    - push
+                    - title
+                    - neighborhood
+                    - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'simple_config' } }
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'imageAltFile', type: 'vich_image' }
+                    - { property: 'surface', help: 'En m²'}
+                    - room
+                    - { property: 'floor', help: "Nombre d'étage pour une maison, étage ou il est situé pour un appartement"}
+                    - property: 'heating'
+                      type: choice
+                      type_options:
+                        choices:
+                            'collectif': 'collectif'
+                            'individuel': 'individuel'
+                            'au sol': 'au sol'
+                            'au sol individuel': 'au sol individuel'
+                            'au sol collectif': 'au sol collectif'
+                            'gaz': 'gaz'
+                            'gaz collectif': 'gaz collectif'
+                            'gaz individuel': 'gaz individuel'
+                            'électrique': 'électrique'
+                            'électrique collectif': 'électrique collectif'
+                            'électrique individuel': 'électrique individuel'
+                    - { property: 'address', help: "Une adresse complete par ligne"}
+                    - street
+                    - city
+                    - benefit
+                    - property: 'dpe'
+                      type: choice
+                      type_options:
+                        choices:
+                            'A': 'A'
+                            'B': 'B'
+                            'C': 'C'
+                            'D': 'D'
+                            'E': 'E'
+                            'F': 'F'
+                            'G': 'G'
+                    - property: 'gse'
+                      type: choice
+                      type_options:
+                        choices:
+                            'A': 'A'
+                            'B': 'B'
+                            'C': 'C'
+                            'D': 'D'
+                            'E': 'E'
+                            'F': 'F'
+                            'G': 'G'
+                    - price
+                    - isActive
+        Menu:
+            class: App\Entity\MenuElement
+            label: 'Menu'
+            list:
+                fields:
+                    - place
+                    - label
+                    - page
+                    - link
+                    - parent
+                    - isActive
+            form:
+                fields:
+                    - place
+                    - label
+                    - page
+                    - link
+                    - parent
+                    - isActive
+        Page:
+            class: App\Entity\Page
+            label: 'Pages'
+            list:
+                fields:
+                    - title
+                    - description
+                    - slug
+                    - isActive
+            form:
+                fields:
+                    - title
+                    - description
+                    - { property: 'content', type: 'fos_ckeditor', type_options: { config_name: 'simple_config' } }
+                    - isActive
+                    - property: 'hasMenu'
+                      help: 'Fait apparaitre ou non le menu a gauche'
+            edit:
+                fields:
+                    - { property: 'url', type: 'text', type_options: { disabled: true }, help: "Ceci est l'url de votre page" }
+        Config:
+            disabled_actions: ['new', 'delete']
+            class: App\Entity\Config
+            label: 'Config'
+            list:
+                fields:
+                    - label
+                    - value
+            form:
+                fields:
+                    - { property: 'label', type_options: { disabled: true } }
+                    - value
+        Push:
+            class: App\Entity\Push
+            label: 'Pushs'
+            list:
+                fields:
+                    - place
+                    - title
+                    - { property: 'image', type: 'image', base_path: '%app.path.push_images%' }
+                    - isActive
+            show:
+                fields:
+                    - title
+                    - { property: 'image', type: 'image', base_path: '%app.path.push_images%' }
+            form:
+                fields:
+                    - property: 'place'
+                      type: choice
+                      type_options:
+                        choices:
+                            '1': '1'
+                            '2': '2'
+                            '3': '3'
+                    - title
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - link
+                    - { property: 'body', type: 'fos_ckeditor' }
+                    - cta
+                    - property: 'backgroundColor'
+                      help: 'Utiliser une couleur hexadecimal du type #ffffff'
+                    - property: 'textColor'
+                      help: 'Utiliser une couleur hexadecimal du type #000000'
+                    - isActive
+        User:
+            class: App\Entity\User
+            list:
+                fields:
+                    - username
+                    - email
+                    - lastLogin
+                    - enabled
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }

@@ -1,0 +1,33 @@
+<div class="noo-sidebar-wrap">
+    <div class="widget widget_categories">
+        {% if element %}
+            <h4 class="widget-title">{{ element.label }}</h4>
+            {% if element.activeChildren|length > 0 %}
+                <ul>
+                    {% for child in element.activeChildren %}
+                        <li class="cat-item cat-item-20 {{ child.page and pageId == child.page.id  ? 'current-cat' : '' }}">
+                            {% if child.link %}
+                                <a href="{{ url(child.link) }}">{{ child.label }}</a>
+                            {% else %}
+                                <a href="{{ child.url }}">{{ child.label }}</a>
+                            {% endif %}
+                            {% if child.activeChildren|length > 0 %}
+                                <ul class="subchild">
+                                    {% for subchild in child.activeChildren %}
+                                        <li class="cat-item cat-item-20 {{ subchild.page and pageId == subchild.page.id  ? 'current-cat' : '' }}">
+                                            {% if subchild.link %}
+                                                <a href="{{ url(subchild.link) }}">{{ subchild.label }}</a>
+                                            {% else %}
+                                                <a href="{{ subchild.url }}">{{ subchild.label }}</a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

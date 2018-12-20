@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block bodyclass %}post-template-default single single-post vc_responsive page-{{ page.slug }}{% endblock %}
+
+{% block body %}
+    <div id="primary" class="content-area " style="margin-bottom: 0px;">
+        <main id="main" class="site-main noo-container">
+            <div class="noo-row">
+                {% if page.hasMenu %}
+                <div class=" noo-sidebar noo-md-3">
+                    {{ render(controller('App\\Controller\\MenuController::side', {'pageId': page.id})) }}
+                </div>
+                {% endif %}
+                <div class="noo-main noo-md-{{ page.hasMenu ? '9' : '12' }}">
+                    <article class="post type-post status-publish format-standard has-post-thumbnail hentry category-home-decor category-modern-style category-uncategorized tag-modern-living has-featured">
+                        <div class="blog-item">
+                            <div class="wrap-entry">
+                                <header class="entry-header">
+                                    <h1>{{ page.title }}</h1>
+                                </header>
+                                <div class="entry-content">
+                                    {{ page.content|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </main>
+    </div>
+{% endblock %}

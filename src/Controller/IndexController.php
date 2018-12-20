@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Push;
+use App\Entity\Property;
 
 class IndexController extends AbstractController
 {
@@ -12,8 +14,13 @@ class IndexController extends AbstractController
      */
     public function index()
     {
+        $repository = $this->getDoctrine()->getRepository(Property::class);
+        $properties = $repository->findBy(['isActive' => 1, 'type' => 'location', 'push' => '1'] , ['place' => 'ASC'], 3);
+        $repository = $this->getDoctrine()->getRepository(Push::class);
+        $pushs = $repository->findBy(['isActive' => 1], ['place' => 'ASC'], 3);
         return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
+            'pushs' => $pushs,
+            'properties' => $properties,
         ]);
     }
 }

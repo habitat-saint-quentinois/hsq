@@ -20,4 +20,124 @@ body {
     line-height: 60px;
 }
 
+.contact-form-block {
+    margin-top: 70px;
+    margin-bottom: 100px;
+}
+
+label.required:after {
+    content: " *";
+    color: #f9a11b;
+    font-weight: bold;
+}
+
+.col-form-label.required:after {
+    content: " *";
+    color: #f9a11b;
+    font-weight: bold;
+}
+
+.form-check-label.required:after {
+    content: "";
+}
+
+.bootstrap .custom-file-label::after {
+    content: "Choisir un fichier";
+}
+
+.tcenter {
+    text-align: center;
+}
+
+.page-nos-partenaires hr {
+    border-top: 1px solid #dee2e6;
+}
+
+.post a {
+    color: #114A82;
+}.post a:hover {
+    color: #F9A11A;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1010;
+    background-color: #000000;
+}
+.modal-backdrop.fade {
+   opacity: 0;
+}
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+
+.noo-agent-detail .noo-box-content .item-info {
+    font-weight: normal;
+}
+
+.cfa-yellow {
+    color: #F9A11A;
+}
+
+.noo-agent-detail .noo-box-content .noo-title {
+    margin: 20px 0 10px;
+}
+.noo-agent-detail .item-info span {
+    font-weight: 500;
+}
+
+#property-map {
+    height: 300px;
+}
+.noo-list-property.style-grid .noo-property-item-wrap .noo-item-featured {
+    height: 250px;
+    overflow: hidden;
+}
+.noo-list-property.style-grid .noo-property-item-wrap .noo-info {
+    height: 105px;
+    overflow: hidden;
+}
+.widget ul li.is-active a, .widget ul li.current-cat a {
+    color: #3a3f4c;
+}
+
+.widget ul li.is-active a, .widget ul li.current-cat > a {
+    color: #f9a11b;
+}
+
+.subchild a {
+    color: #a1a2a2;
+}
+
+legend {
+    border-bottom: none;
+}
+
+#calculatorform {
+    background-color: #fbfbfb;
+    padding: 10px;
+    border: 1px #e4dcdc solid;
+    margin-bottom: 15px;
+}
+#calculatorform i {
+    color: #378484;
+}
+
+#calculatorform .col-form-label {
+    text-align: right;
+}
+tr.ceilline {
+    font-weight: bold;
+    color: #FCAF40;
+    background-color: #FBFBFB;
+}
+
+/*.bootstrap .form-control, .bootstrap .custom-file-label, .bootstrap .custom-file-input {
+    height: 40px;
+    font-size: 1.5rem;
+}*/
 

@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contatez-nous{% endblock %}
+
+{% block body %}
+    <div class="page_fullwidth" role="main" style="margin-bottom: 0px;">
+        <div class="noo-container-fluid">
+            <div class="contact-form-block">
+                <div class="noo-container">
+                    <div class="noo-row">
+                        <div class="wpb_column vc_column_container vc_col-sm-12">
+                            <div class="vc_column-inner ">
+                                <div class="wpb_wrapper">
+                                    <div class="noo-information">
+                                        <div class="noo-row">
+                                            <div class="noo-md-6 bootstrap">
+                                                <h3 class="noo-title">Nous contacter</h3>
+                                                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                                                {% if success %}
+                                                    <div class="alert alert-success" role="alert">
+                                                        Votre message a bien été envoyé. Merci.
+                                                    </div>
+                                                {% endif %}
+                                                {{ form_start(form, {'attr': {'id': 'contactform'} }) }}
+                                                {{ form_row(form.type, {label_attr: {class: 'radio-inline'} }) }}
+                                                {{ form_row(form.civility, {label_attr: {class: 'radio-inline'} }) }}
+                                                <div class="form-row">
+
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.lastname) }}
+                                                        {{ form_widget(form.lastname) }}
+                                                        {{ form_help(form.lastname) }}
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.firstname) }}
+                                                        {{ form_widget(form.firstname) }}
+                                                        {{ form_help(form.firstname) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_row(form.function) }}
+                                                {{ form_row(form.address) }}
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.postcode) }}
+                                                        {{ form_widget(form.postcode) }}
+                                                        {{ form_help(form.postcode) }}
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.city) }}
+                                                        {{ form_widget(form.city) }}
+                                                        {{ form_help(form.city) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.email) }}
+                                                        {{ form_widget(form.email) }}
+                                                        {{ form_help(form.email) }}
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        {{ form_label(form.phone) }}
+                                                        {{ form_widget(form.phone) }}
+                                                        {{ form_help(form.phone) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_row(form.file) }}
+                                                {{ form_row(form.message) }}
+                                                <div class="form-group">
+                                                    {{ form_widget(form.recaptcha) }}
+                                                    {{ form_help(form.recaptcha) }}
+                                                </div>
+                                                {{ form_row(form.send) }}
+                                                {{ form_end(form) }}
+                                            </div>
+                                            <div class="noo-md-6">
+                                                <h3 class="noo-title">Nos Agences</h3>
+                                                <iframe width="100%" height="350px" frameBorder="0" allowfullscreen src="https://umap.openstreetmap.fr/fr/map/habitat-saint-quentinois_276469?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=false&allowEdit=false&moreControl=false&searchControl=false&tilelayersControl=false&embedControl=false&datalayersControl=false&onLoadPanel=undefined&captionBar=false&fullscreenControl=false&locateControl=false&editinosmControl=false&measureControl=false"></iframe>
+                                                <div class="noo-row">
+                                                    <div class="noo-md-6">
+                                                        <h4>Siège</h4>
+                                                        <p>
+                                                            142 bd Gambetta<br/>
+                                                            02100 SAINT-QUENTIN
+                                                        </p>
+                                                    </div>
+                                                    <div class="noo-md-6">
+                                                        <h4>Agence EUROPE</h4>
+                                                        <p>
+                                                            4 rue Henri Hertz <br/>
+                                                            02100 SAINT-QUENTIN
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="noo-row">
+                                                    <div class="noo-md-6">
+                                                        <h4>Agence de NEUVILLE</h4>
+                                                        <p>
+                                                            10 rue Léon Lemaire<br/>
+                                                            02100 SAINT-QUENTIN
+                                                        </p>
+                                                    </div>
+                                                    <div class="noo-md-6">
+                                                        <h4>Agence du VERMANDOIS</h4>
+                                                        <p>
+                                                            22 rue du Docteur Georges Bachy<br/>
+                                                            02100 SAINT-QUENTIN
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

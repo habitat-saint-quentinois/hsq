@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ property.title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+{% endblock %}
+
+{% block body %}
+    <div id="primary" class="content-area " style="margin-bottom: 0px;">
+        <main id="main" class="site-main ">
+            <div class="noo-row">
+                <div class="noo-main noo-md-12">
+                    <div class="rp-agent post-521 noo_agent type-noo_agent status-publish has-post-thumbnail hentry has-featured">
+                        <div class="noo-container noo-agent-detail">
+                            <div class="noo-thumbnail noo-md-5">
+                                <img src="{{ asset('images/property/'  ~ property.image) }}" alt="{{ property.title }}">
+                                {% if property.imageAlt %}
+                                    <img src="{{ asset('images/property/'  ~ property.imageAlt) }}" alt="{{ property.title }}">
+                                {% endif %}
+                            </div>
+                            <div class="noo-info-agent noo-md-7">
+                                <div class="noo-box-content">
+                                    <h1 class="noo-title bootstrap">
+                                        {% if property.type == 'location' %}
+                                            <span class="badge badge-primary">Location</span>
+                                        {% else %}
+                                            <span class="badge badge-primary">Vente</span>
+                                        {% endif %}
+                                        {{ property.title }}
+                                    </h1>
+                                    <div class="noo-box-info">
+                                        <div class="item-info">
+                                            {% if property.neighborhood %}
+                                                <span >{{ property.neighborhood }}</span>
+                                            {% endif %}
+                                            {% if property.street %}
+                                                <span >{{ property.street }}</span>
+                                            {% endif %}
+                                            {% if property.definition %}
+                                                <span >{{ property.definition|capitalize }}</span>
+                                            {% endif %}
+                                            {% if property.kind %}
+                                                <span >{{ property.kind|capitalize }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="noo-row">
+                                            <div class="noo-md-6">
+                                                <ul class="item-info">
+                                                    {% if property.surface %}
+                                                        <li><i class="cfa-yellow fas fa-ruler"></i> Surface: {{ property.surface }} m²</li>
+                                                    {% endif %}
+                                                    {% if property.room %}
+                                                        <li><i class="cfa-yellow fas fa-bed"></i> Chambres: {{ property.room }}</li>
+                                                    {% endif %}
+                                                    {% if property.dpe %}
+                                                        <li><i class="cfa-yellow fas fa-thermometer-half"></i> Classe DPE: {{ property.dpe }}</li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                            <div class="noo-md-6">
+                                                <ul class="item-info">
+                                                    {% if property.floor %}
+                                                        <li><i class="cfa-yellow fas fa-building"></i> Etage: {{ property.floor }}</li>
+                                                    {% endif %}
+                                                    {% if property.heating %}
+                                                        <li><i class="cfa-yellow fas fa-fire"></i> Chauffage: {{ property.heating }}</li>
+                                                    {% endif %}
+                                                    {% if property.gse %}
+                                                        <li><i class="cfa-yellow fas fa-home"></i> GES: {{ property.gse }}</li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="agent-about">
+                                            {{ property.description|raw }}
+                                        </div>
+                                        <div class="agent-about">
+                                            <div class="noo-row">
+                                                <div class="noo-md-7">
+                                                    {% if property.price > 0 %}
+                                                        {% if property.type == 'location' %}
+                                                            <h4 >Loyer hors charges : {{ property.price }} euros</h4>
+                                                        {% else %}
+                                                            <h4 >Prix : {{ property.price }} euros</h4>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="noo-md-5 bootstrap">
+                                                    {% if property.type == 'location' %}
+                                                        <a type="button" href="{{ url('rental-list') }}" class="btn btn-secondary"><i class="fas fa-arrow-circle-left"></i> Retour</a>
+                                                    {% else %}
+                                                        <a type="button" href="{{ url('sell-list') }}" class="btn btn-secondary"><i class="fas fa-arrow-circle-left"></i> Retour</a>
+                                                    {% endif %}
+                                                    <a type="button" href="{{ url('contact') }}" class="btn btn-info"><i class="fas fa-edit"></i> Contactez-nous</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -5,63 +5,38 @@
 {% block body %}
     <section class="noo-page-heading noo-parallax " data-parallax="scroll" data-image-src="{{ asset('images/residence_blvd_pierret.jpg') }}">
         <div class="noo-container">
-            {#<div class="wrap-page-title">
-                <h1 class="page-title">Espace locataire</h1>
-                <div class="noo-page-breadcrumb">
-                    <div>
-                        <a href="http://www.habitatsaintquentinois.fr/EspaceLocataire/User/profil/preinscription">
-                            <i class="fa fa-arrow-alt-circle-right"></i> Cliquez ici pour vous inscrire en ligne
-                        </a>
-                    </div>
-                    <div>
-                        <a href="http://www.habitatsaintquentinois.fr/EspaceLocataire/User/profil/signature">
-                            <i class="fa fa-arrow-alt-circle-right"></i> Cliquez ici pour vous connecter
-                        </a>
-                    </div>
-                </div>
-            </div>#}
         </div>
     </section>
     <div id="primary" class="content-area " style="margin-bottom: 0px;">
         <main id="main" class="site-main noo-container">
             <div class="noo-row">
-
-                <div class="noo-main noo-md-4">
-                    <div class="card">
-                        <header>
-                            <h2>Elections des représentants des locataires</h2>
-                        </header>
-                        <p>Le 13 Décembre, pensez à voter pour élire vos représentants des locataires pour les 4 prochaines années.</p>
-                        <footer><a href="#"><i class="fa fa-angle-right"></i> En savoir plus</a></footer>
-                    </div>
-                </div>
-
-                <div class="noo-main noo-md-4">
-                    <div class="card">
-                        <header>
-                            <h2>Le guide des locataires</h2>
-                        </header>
-                        <p style="text-align: justify">
-                            <img src="{{ asset('images/guide_des_locataires.png') }}" width="70px" style="float: left; border: 1px grey solid; margin: 5px 10px 5px 0"/>
-                            Habitat Saint-Quentinois a édité un guide des réparations locatives afin d'apporter une meilleure connaissance sur les obligations de chacun au sein de son logement.
-                        </p>
-                        <footer><a href="#"><i class="fa fa-angle-right"></i> Découvrez le vite</a></footer>
-                    </div>
-                </div>
-
-                <div class="noo-main noo-md-4">
-                    <a href="#" >
-                        <img style="height: 250px; width: 100%" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/rep.-img-promo-pub/popup/116254-24-fre-FR/popup.png"/>
-                    </a>
-                </div>
-
-{#                <div class="noo-main noo-md-4">
-                    <div class="card home-link">
-                        <h2><a href="#"><i class="fa fa-map-marker-alt"></i> Nous Situer</a></h2>
-                        <h2><a href="#"><i class="fa fa-edit"></i> Nous Contacter</a></h2>
-                        <h2><a href="#"><i class="fa fa-file-download"></i> Documents à Télécharger</a></h2>
-                    </div>
-                </div>#}
+                {% for push in pushs %}
+                    {% if push.image %}
+                        <div class="noo-main noo-md-4">
+                            <a href="{{ push.link }}" >
+                                <img
+                                    style="height: 250px; width: 100%"
+                                    src="{{ asset('images/push/'  ~ push.image) }}"
+                                />
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="noo-main noo-md-4">
+                            <div class="card" style="{{ push.backgroundColor ? 'background-color:' ~ push.backgroundColor ~ ';' }}{{ push.textColor ? 'color:' ~ push.textColor ~ ';' }}">
+                                <header>
+                                    <h2>{{ push.title }}</h2>
+                                    <span class="push-date"><i class="far fa-calendar-alt"></i> Publié le {{ push.createdAt|date('d/m/Y') }}</span>
+                                </header>
+                                <p>{{ push.body|raw }}</p>
+                                <footer>
+                                    <a href="{{ push.link }}">
+                                        <i class="fa fa-angle-right"></i> {{ push.cta }}
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
 
             <div class="noo-row">
@@ -79,212 +54,81 @@
             </div>
 
             <div class="noo-row noo-list-property style-grid">
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Rue Chabrier</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>Proximité zone commerciale Auchan
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/quartier-de-vermand8/133949-1-fre-FR/QUARTIER-DE-VERMAND_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>52 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>2 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;282,56 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
+                {% for property in properties %}
+                    <div class="noo-main noo-md-4">
+                        <div class="noo-property-item-wrap">
+                            <div class="noo-item-head">
+                                <h4 class="item-title">
+                                    <a href="{{ property.url }}" title="{{ property.title }}">{{ property.title }}</a>
+                                </h4>
+                                <address>
+                                    <i class="fa fa-map-marker-alt"></i>
+                                    {% if property.neighborhood %}
+                                        <span >{{ property.neighborhood }}</span> -
+                                    {% endif %}
+                                    <span >{{ property.street }}</span>
+                                </address>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="noo-item-featured">
+                                <a href="{{ property.url }}" title="{{ property.title }}">
+                                    <img class="rp-thumbnail" src="{{ asset('images/property/'  ~ property.image) }}" alt="{{ property.title }}">
+                                </a>
+                            </div>
+                            <div class="noo-info">
 
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Rue de la Fère</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>Proche axe Saint-Quentin/Laon
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/faubourg-d-isle3/134019-1-fre-FR/FAUBOURG-D-ISLE_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>78 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>2 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;382,53 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
+                                {% if property.surface %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-ruler"></i> Surface: {{ property.surface }} m²
+                                        </span>
+                                {% endif %}
+                                {% if property.room %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-bed"></i> Chambres: {{ property.room }}
+                                        </span>
+                                {% endif %}
+                                {% if property.dpe %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-thermometer-half"></i> Classe DPE: {{ property.dpe }}
+                                        </span>
+                                {% endif %}
+                                {% if property.floor %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-building"></i> Etage: {{ property.floor }}
+                                        </span>
+                                {% endif %}
+                                {% if property.heating %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-fire"></i> Chauffage: {{ property.heating }}
+                                        </span>
+                                {% endif %}
+                                {% if property.gse %}
+                                    <span>
+                                            <i class="cfa-yellow fas fa-home"></i> GES: {{ property.gse }}
+                                        </span>
+                                {% endif %}
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="noo-action">
+                                <div class="property-price">
+                                    {% if property.price > 0 %}
+                                        {% if property.type == 'location' %}
+                                            <h4 >{{ property.price }} euros / mois</h4>
+                                        {% else %}
+                                            <h4 >{{ property.price }} euros</h4>
+                                        {% endif %}
+                                    {% else %}
+                                        <h4 >Renseignez-vous</h4>
+                                    {% endif %}
+                                </div>
 
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Avenue Buffon</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>A proximité des commerces
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/quartier-europe12/134258-1-fre-FR/Quartier-Europe_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>92 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>4 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;402,42 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-
-{#            <div class="noo-row">
-                <div class="noo-main noo-md-12">
-                    <div class="noo-title-header">
-                        <div class="noo-theme-wraptext">
-                            <div class="wrap-title">
-                                <h3 class="noo-theme-title">
-                                    <span class="first-word">Biens en <span></span></span> Vente
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="noo-row noo-list-property style-grid">
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Rue Chabrier</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>Proximité zone commerciale Auchan
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/quartier-de-vermand8/133949-1-fre-FR/QUARTIER-DE-VERMAND_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>52 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>2 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;282,56 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Rue de la Fère</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>Proche axe Saint-Quentin/Laon
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/faubourg-d-isle3/134019-1-fre-FR/FAUBOURG-D-ISLE_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>78 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>2 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;382,53 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="noo-main noo-md-4">
-                    <div class="noo-property-item-wrap">
-                        <div class="noo-item-head">
-                            <h4 class="item-title">
-                                <a href="#" title="Loft Above The City">Avenue Buffon</a>
-                            </h4>
-                            <address>
-                                <i class="rp-icon-map-marker" aria-hidden="true"></i>A proximité des commerces
-                            </address>
-                        </div>
-                        <div class="noo-item-featured">
-                            <a href="#" title="Rue Chabrier">
-                                <img class="rp-thumbnail" src="http://www.habitatsaintquentinois.fr/var/acg/storage/images/contenu/offres-de-location/quartier-europe12/134258-1-fre-FR/Quartier-Europe_agrandissement.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="noo-info">
-                            <span class="rp-primary-file-1">
-                                <i class="icon-ruler"></i> <span>92 m²</span>
-                            </span>
-                            <span class="rp-primary-file-2">
-                                <i class="icon-bed"></i> <span>4 <span class="label-bedrooms-684">chambres</span></span>
-                            </span>
-                        </div>
-                        <div class="noo-action">
-                            <div class="property-price">
-                                <span class="before-price"></span> <span class="amount">&nbsp;402,42 <span class="format_price">€</span></span> <span class="after-price">/ mois</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>#}
 
             <div class="noo-row">
                 <div class="noo-main noo-md-12" style="text-align: center; margin-top: 30px">
-                    <button type="submit" class="noo-button">Voir plus d'offres</button>
+                    <a type="submit" href="{{ url('rental-list') }}" class="noo-button">Voir plus d'offres</a>
                 </div>
             </div>
 
