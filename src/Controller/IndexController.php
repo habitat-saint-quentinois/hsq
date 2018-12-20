@@ -17,7 +17,7 @@ class IndexController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Property::class);
         $properties = $repository->findBy(['isActive' => 1, 'type' => 'location', 'push' => '1'] , ['place' => 'ASC'], 3);
         $repository = $this->getDoctrine()->getRepository(Push::class);
-        $pushs = $repository->findBy(['isActive' => 1], ['place' => 'ASC'], 3);
+        $pushs = $repository->findForHome();
         return $this->render('index/index.html.twig', [
             'pushs' => $pushs,
             'properties' => $properties,

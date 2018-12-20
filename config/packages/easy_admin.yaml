@@ -202,13 +202,14 @@ easy_admin:
                       type: choice
                       type_options:
                         choices:
+                            '0': '0'
                             '1': '1'
                             '2': '2'
                             '3': '3'
                     - title
-                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'imageFile', type: 'vich_image', help: 'Image en 370x250px. Si une image est mise, seul le lien est pris en compte, pas les textes'}
                     - link
-                    - { property: 'body', type: 'fos_ckeditor' }
+                    - { property: 'body', type: 'fos_ckeditor' , type_options: { config_name: 'simple_config' } }
                     - cta
                     - property: 'backgroundColor'
                       help: 'Utiliser une couleur hexadecimal du type #ffffff'

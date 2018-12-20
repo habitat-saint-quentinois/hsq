@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes nos news{% endblock %}
+
+{% block body %}
+<div id="primary" class="content-area " style="margin-bottom: 0px;">
+    <main id="main" class="site-main noo-container">
+        <div class="noo-row" style="margin-bottom: 30px;">
+            {% for push in pushs %}
+                {% if push.image %}
+                    <div class="noo-main noo-md-4"  >
+                        <a href="{{ push.link }}" >
+                            <img
+                                    style="height: 250px; width: 100%"
+                                    src="{{ asset('images/push/'  ~ push.image) }}"
+                            />
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="noo-main noo-md-4">
+                        <div class="card" style="{{ push.backgroundColor ? 'background-color:' ~ push.backgroundColor ~ ';' }}{{ push.textColor ? 'color:' ~ push.textColor ~ ';' }}">
+                            <header>
+                                <h2>{{ push.title }}</h2>
+                                <span class="push-date"><i class="far fa-calendar-alt"></i> Publié le {{ push.createdAt|date('d/m/Y') }}</span>
+                            </header>
+                            <p>{{ push.body|raw }}</p>
+                            <footer>
+                                <a  {{ '.pdf' in push.link ? 'download' }} style="{{ push.textColor ? 'color:' ~ push.textColor ~ ';' }}" href="{{ push.link }}">
+                                    <i class="fa fa-angle-right"></i> {{ push.cta }}
+                                </a>
+                            </footer>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if loop.index is divisible by (3) %}
+                    </div>
+                    <div class="noo-row" style="margin-bottom: 30px;">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -17,7 +17,7 @@ class CalculatorType extends AbstractType
             ->add('french', ChoiceType::class, [
                 'choices'  => [
                     'Oui' => '1',
-                    'Non' => '0',
+                    'Non' => '2',
                 ],
                 'expanded' => true,
                 'multiple' => false,

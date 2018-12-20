@@ -19,22 +19,23 @@ class PushRepository extends ServiceEntityRepository
         parent::__construct($registry, Push::class);
     }
 
-//    /**
-//     * @return Push[] Returns an array of Push objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Push[] Returns an array of Push objects
+     */
+    public function findForHome()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('p.isActive = :active')
+            ->andWhere('p.place != :place')
+            ->setParameter('active', 1)
+            ->setParameter('place', 0)
+            ->orderBy('p.place', 'ASC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Push
