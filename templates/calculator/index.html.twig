@@ -1,0 +1,221 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calcul des Droits{% endblock %}
+
+{% block bodyclass %}post-template-default single single-post vc_responsive{% endblock %}
+
+{% block form_group_class -%}
+    col-sm-4
+{%- endblock form_group_class %}
+
+{% block form_label_class -%}
+    col-sm-8
+{%- endblock form_label_class %}
+
+{% block body %}
+    <div id="primary" class="content-area " style="margin-bottom: 0px;">
+        <main id="main" class="site-main noo-container">
+            <div class="noo-row">
+                <div class=" noo-sidebar noo-md-3">
+                    {{ render(controller('App\\Controller\\MenuController::side', {'pageId': 10})) }}
+                </div>
+                <div class="noo-main noo-md-9">
+                    <article class="post type-post status-publish format-standard has-post-thumbnail hentry category-home-decor category-modern-style category-uncategorized tag-modern-living has-featured">
+                        <div class="blog-item">
+                            <div class="wrap-entry">
+                                <header class="entry-header">
+                                    <h1>Calcul des Droits</h1>
+                                </header>
+                                <div class="entry-content bootstrap">
+                                    <p>Vous souhaitez faire une demande de logement à Habitat Saint-Quentinois, vérifiez que vous remplissez les conditions d’attribution en remplissant le formulaire ci-dessous.</p>
+                                    {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig', _self] %}
+                                    {{ form_start(form, {'attr': {'id': 'calculatorform'} }) }}
+                                    {{ form_row(form.french, {label_attr: {class: 'radio-inline'} }) }}
+                                    {{ form_row(form.adult) }}
+                                    {{ form_row(form.child) }}
+                                    <p>
+                                        <i>Additionnez les revenus de l'année 2016 des différentes personnes vivant dans le logement</i>
+                                    </p>
+                                    <p>
+                                        <i>Note : Si vous avez subi une baisse de revenu d'au moins 10% par rapport aux revenus déclarés en 2016, prenez en compte :</i>
+                                    </p>
+                                    <ul>
+                                        <li><i>Soit les revenus perçus en année civile 2017</i></li>
+                                        <li><i>Soit les revenus perçus dans les 12 derniers mois</i></li>
+                                    </ul>
+                                    <p>
+                                        <i>Pour 2018, le revenu fiscal de référence est celui de l'année 2016</i>
+                                    </p>
+                                    {{ form_row(form.revenue) }}
+                                    {{ form_row(form.send) }}
+                                    {{ form_end(form) }}
+
+                                    {% if result.code %}
+                                        <h4>Résultats</h4>
+                                        {% if result.valid %}
+                                            <p>
+                                                Vos revenus ne dépassent pas le plafond de <strong>{{ result.ceil }}</strong> euros attribué à votre catégorie de ménage. (voir tableau ci-dessous), <strong>vous pouvez donc bénéficier d'un logement social</strong>.
+                                            </p>
+                                        {% else %}
+                                            <p>
+                                                Vos revenus dépassent le plafond de <strong>{{ result.ceil }}</strong> euros attribué à votre catégorie de ménage. Cependant, il existe d'autres solutions de logement qui pourraient vous intéresser : connaissez-vous la location-accession ?
+                                            </p>
+                                        {% endif %}
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 60%; vertical-align: middle">Définition des catégories de ménage</th>
+                                                    <th scope="col" style="width: 20%; vertical-align: middle">Plafonds 2017</th>
+                                                    <th scope="col" style="width: 20%; vertical-align: middle">Salaire de référence mensuel net</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="{{ result.code == 1 ? 'ceilline' }}">
+                                                    <td>Personne seule</td>
+                                                    <td>19417</td>
+                                                    <td>1800</td>
+                                                </tr>
+                                                <tr class="{{ result.code == 2 ? 'ceilline' }}">
+                                                    <td>2 personnes sauf jeune ménage*</td>
+                                                    <td>25930</td>
+                                                    <td>2400</td>
+                                                </tr>
+                                                <tr class="{{ result.code == 3 ? 'ceilline' }}">
+                                                    <td>3 personnes ou jeune ménage* ou personne seule avec une personne à charge</td>
+                                                    <td>31183</td>
+                                                    <td>2890</td>
+                                                </tr>
+                                                <tr class="{{ result.code == 4 ? 'ceilline' }}">
+                                                    <td>4 personnes ou personne seule avec deux personnes à charge	</td>
+                                                    <td>37645</td>
+                                                    <td>3480</td>
+                                                </tr>
+                                                <tr class="{{ result.code == 5 ? 'ceilline' }}">
+                                                    <td>5 personnes ou personne seule avec trois personnes à charge	</td>
+                                                    <td>44284</td>
+                                                    <td>4100</td>
+                                                </tr>
+                                                <tr class="{{ result.code == 6 or result.code == 7 ? 'ceilline' }}">
+                                                    <td>6 personnes ou personne seule avec quatre personnes à charge</td>
+                                                    <td>49908</td>
+                                                    <td>4600</td>
+                                                </tr>
+                                                <tr  class="{{ result.code == 7 ? 'ceilline' }}">
+                                                    <td>Par personne supplémentaire	</td>
+                                                    <td>5567</td>
+                                                    <td>510</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>
+                                            <i>* Définition de jeune ménage: Couple, marié ou non, dont la somme des âges est égale au plus à 55 ans.</i>
+                                        </p>
+                                    {% endif %}
+                                    {#<div class="bordureBloc">
+                                        <table id="tabResult">
+                                            <thead>
+                                            <tr>
+                                                <td>Définition des catégories de ménage</td>
+                                                <td>Plafonds 2017</td>
+                                                <td>Salaire de référence mensuel net</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr id="ligne_1">
+                                                <td id="lib_1">
+                                                    Personne seule</td>
+                                                <td id="pla_1">19417
+
+
+                                                </td>
+                                                <td id="sal_1">1800
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_2">
+                                                <td id="lib_2">
+                                                    2 personnes sauf jeune ménage*</td>
+                                                <td id="pla_2">25930
+
+
+                                                </td>
+                                                <td id="sal_2">2400
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_3">
+                                                <td id="lib_3">
+                                                    3 personnes ou jeune ménage* ou personne seule avec une personne à charge</td>
+                                                <td id="pla_3">31183
+
+
+                                                </td>
+                                                <td id="sal_3">2890
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_4" class="select">
+                                                <td id="lib_4">
+                                                    4 personnes ou personne seule avec deux personnes à charge</td>
+                                                <td id="pla_4">37645
+
+
+                                                </td>
+                                                <td id="sal_4">3480
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_5">
+                                                <td id="lib_5">
+                                                    5 personnes ou personne seule avec trois personnes à charge</td>
+                                                <td id="pla_5">44284
+
+
+                                                </td>
+                                                <td id="sal_5">4100
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_6">
+                                                <td id="lib_6">
+                                                    6 personnes ou personne seule avec quatre personnes à charge</td>
+                                                <td id="pla_6">49908
+
+
+                                                </td>
+                                                <td id="sal_6">4600
+
+
+                                                </td>
+                                            </tr>
+                                            <tr id="ligne_7">
+                                                <td id="lib_7">
+                                                    Par personne supplémentaire</td>
+                                                <td id="pla_7">5567
+
+
+                                                </td>
+                                                <td id="sal_7">510
+
+
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>#}
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
