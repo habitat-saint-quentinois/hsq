@@ -1,1 +1,2 @@
-yarn run build
+yarn install
+yarn encore prod
