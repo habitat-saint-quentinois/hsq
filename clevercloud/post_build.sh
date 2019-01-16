@@ -1,1 +1,1 @@
-yarn encore prod
+yarn run build
