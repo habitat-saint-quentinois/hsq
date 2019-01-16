@@ -1,2 +1,2 @@
 yarn install
-yarn encore prod
+yarn encore production
