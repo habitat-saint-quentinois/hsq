@@ -2,8 +2,6 @@
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
-/public/upload/
-/public/userfiles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -25,5 +23,6 @@ yarn-error.log
 ###< symfony/webpack-encore-pack ###
 
 .idea
-public/images/push/*
 .DS_Store
+/public/upload/
+/public/userfiles/
