@@ -3,13 +3,13 @@ vich_uploader:
     mappings:
         push:
             uri_prefix: '%app.path.push_images%'
-            upload_destination: '%kernel.project_dir%/public/images/push'
+            upload_destination: '%kernel.project_dir%/public/upload/images/push'
         property:
             uri_prefix: '%app.path.property_images%'
-            upload_destination: '%kernel.project_dir%/public/images/property'
+            upload_destination: '%kernel.project_dir%/public/upload/images/property'
         document:
             uri_prefix: '%app.path.download_document%'
-            upload_destination: '%kernel.project_dir%/public/document/download'
+            upload_destination: '%kernel.project_dir%/public/upload/document/download'
         cover:
             uri_prefix: '%app.path.download_images%'
-            upload_destination: '%kernel.project_dir%/public/images/download'
+            upload_destination: '%kernel.project_dir%/public/upload/images/download'

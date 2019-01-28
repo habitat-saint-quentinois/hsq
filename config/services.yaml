@@ -5,10 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr'
-    app.path.push_images: /images/push
-    app.path.property_images: /images/property
-    app.path.download_document: /download/document
-    app.path.download_images: /images/download
+    app.path.push_images: /upload/images/push
+    app.path.property_images: /upload/images/property
+    app.path.download_document: /upload/download/document
+    app.path.download_images: /upload/images/download
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
