@@ -3,7 +3,7 @@
 /.env
 /public/bundles/
 /public/upload/
-#/public/userfiles/
+/public/userfiles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
