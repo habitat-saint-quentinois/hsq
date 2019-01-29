@@ -13,8 +13,8 @@
                         <div class="noo-property-item-wrap">
                             <div class="noo-row">
                                 <div class="noo-main noo-md-3" style="padding: 5px">
-                                    <a download="{{ document.fileNameProperty }}" href="{{ asset('document/download/'  ~ document.fileNameProperty) }}">
-                                        <img class="rp-thumbnail" src="{{ asset('images/download/'  ~ document.image) }}" alt="{{ document.name }}">
+                                    <a download="{{ document.fileNameProperty }}" href="{{ asset('upload/document/download/'  ~ document.fileNameProperty) }}">
+                                        <img class="rp-thumbnail" src="{{ asset('upload/images/download/'  ~ document.image) }}" alt="{{ document.name }}">
                                     </a>
                                 </div>
                                 <div class="noo-main noo-md-8">
@@ -22,7 +22,7 @@
                                     <i>{{ document.createdAt|date('d/m/Y') }} - Taille: {{ (document.size / 1000)|round  }} ko </i>
                                     {{ document.description|raw }}
                                     <div style="text-align: right">
-                                        <a download="{{ document.fileNameProperty }}" href="{{ asset('document/download/'  ~ document.fileNameProperty) }}" class="noo-button">Télécharger</a>
+                                        <a download="{{ document.fileNameProperty }}" href="{{ asset('upload/document/download/'  ~ document.fileNameProperty) }}" class="noo-button">Télécharger</a>
                                     </div>
                                 </div>
                             </div>
