@@ -44,8 +44,8 @@ class ContactController extends AbstractController
         try {
             $orig = $target = null;
             $message = (new \Swift_Message('Nouvelle Demande de Contact'))
-                ->setFrom('lanfisis@gmail.com')
-                ->setTo('lanfisis@gmail.com')
+                ->setFrom('david.buros@gmail.com')
+                ->setTo('david.buros@gmail.com')
                 ->setBody($this->renderView(
                         'emails/contact.html.twig',
                         ['date' => date('d/m/Y'), 'contact' => $contact]
