@@ -4,6 +4,7 @@
 
         var $btn = $('.btn-navbar'),
             $nav = null,
+            $mobilenav = null,
             $fixeditems = null;
 
         if (!$btn.length){
@@ -14,7 +15,10 @@
         $(document.documentElement).addClass('off-canvas-ready');
 
         $nav = $('<div class="noo-main-canvas" />').appendTo($('<div id="off-canvas-nav"></div>').appendTo(document.body));
-        $($btn.data('target')).clone().appendTo($nav);
+        $mobilenav = $($btn.data('target')).clone();
+        $mobilenav.find('#menu-espace-locataire').removeClass('hidden');
+        $mobilenav.appendTo($nav);
+
 
         $btn.click (function(e){
             if ($(this).data('off-canvas') == 'show') {
