@@ -16,6 +16,7 @@ require('@fortawesome/fontawesome-free/js/all.js');
 const $ = require('jquery');
 require('jquery-parallax.js');
 require('bootstrap');
+require('./off-canvas.js');
 
 $("#contactform").submit(function(event) {
     var recaptcha = $("#g-recaptcha-response").val();
@@ -31,4 +32,13 @@ $('.custom-file-input').on('change',function(){
     $(this).next('.custom-file-label').html(fileName);
 })
 
-
+$(document).ready(function(){
+    "use strict";
+    $('#off-canvas-nav li.menu-item-has-children').append('<i class="mobile-menu-caret"><i class="fa fa-angle-down"></i></i>');
+    $('#off-canvas-nav li.menu-item-has-children i').on("click", function (e) {
+        var link_i = $(this); //preselect the link
+        link_i.prev().slideToggle(300);
+        link_i.parent().toggleClass('active');
+        conole.log(link_i.prev());
+    });
+});

@@ -16482,10 +16482,6 @@ body.noo-cover-body:before {
         filter: alpha(opacity=60)
     }
 
-    .off-canvas #off-canvas-nav .noo-main-canvas .nav-collapse li.menu-item-has-children.active>i:before {
-        content: "\f106"
-    }
-
     .off-canvas #off-canvas-nav .noo-main-canvas .nav-collapse li a {
         color: #000;
         display: block;
